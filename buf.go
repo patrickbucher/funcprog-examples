@@ -4,8 +4,8 @@ import "fmt"
 
 // TODO
 // bind
-// unit
-// lift
+// unit: buf -> (buf, error)
+// lift: func(buf) (buf, error) -> func(buf, error) (buf, error)
 
 type Buffer struct {
 	Data []byte
