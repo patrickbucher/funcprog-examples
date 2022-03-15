@@ -25,3 +25,49 @@ function whatAreFunctors() {
     const promiseTwiceThatNumber = promiseNumber.then(x => x * 2);
     promiseTwiceThatNumber.then(console.log);
 }
+
+const numberedLetters = {
+    a: 1,
+    b: 2,
+    c: 3
+};
+
+const mapObject = (object, f) => {
+    const entries = Object.entries(object);
+    const mappedObject = {};
+    entries.forEach(([key, value]) => {
+        mappedObject[key] = f(value);
+    });
+    return mappedObject; 
+};
+
+const stringNumberedLetters = mapObject(numberedLetters, x => x + '');
+console.log(stringNumberedLetters);
+
+class Maybe {
+    constructor(value) {
+        this.value = value;
+    }
+
+    static just(value) {
+        if (value === null || value === undefined) {
+            throw new Error("Can't construct a value from null/undefined");
+        }
+        return new Maybe(value);
+    }
+
+    static nothing() {
+        return new Maybe(null);
+    }
+
+    map(f) {
+        if (this.value === null) {
+            return this;
+        }
+        return new Maybe(f(this.value));
+    }
+}
+
+const maybeNumber = Maybe.just(5);
+const maybeString = maybeNumber.map(x => x + '');
+const maybeAnotherString = Maybe.nothing().map(x => x + '');
