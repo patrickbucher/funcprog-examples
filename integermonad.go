@@ -16,8 +16,6 @@ func Lift(f func(Int, Int) Int) func(Int, Int) (Int, error) {
 	}
 }
 
-func Bind(
-
 func Mul(x, y Int) Int {
 	return x * y
 }
